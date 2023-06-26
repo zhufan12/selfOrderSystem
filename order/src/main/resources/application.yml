@@ -1,6 +1,11 @@
 spring:
+  cloud:
+    loadbalancer:
+      ribbon:
+        enable: false
+      enabled: true
   application:
-    name: product
+    name: order
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/selforde?characterEncoding=utf-8&useSSL=false
@@ -8,10 +13,13 @@ spring:
     password: root
   jpa:
     show-sql: true
+
+
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-
 server:
-  port: 8081
+  port: 8082
+

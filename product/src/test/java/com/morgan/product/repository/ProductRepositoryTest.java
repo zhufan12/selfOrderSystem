@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,5 +21,13 @@ class ProductRepositoryTest {
     void findByStatus() {
         List<Product> products = productRepository.findByStatus(ProductStatus.SALE);
         assert products.size() > 0;
+    }
+
+
+    @Test
+    void findByIdIn(){
+        List<Integer> ids = Arrays.asList(1,2);
+        List<Product> products =productRepository.findByIdIn(ids);
+        assert  products.size() > 0;
     }
 }

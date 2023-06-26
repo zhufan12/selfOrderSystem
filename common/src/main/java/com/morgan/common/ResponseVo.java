@@ -1,6 +1,5 @@
-package com.morgan.product.Vo;
+package com.morgan.common;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data

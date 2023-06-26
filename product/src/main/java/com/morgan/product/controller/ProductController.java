@@ -1,20 +1,19 @@
 package com.morgan.product.controller;
 
+import com.morgan.common.ResponseVo;
+import com.morgan.common.dto.CartDTO;
+import com.morgan.common.dto.ProductResp;
 import com.morgan.product.Vo.ProductVo;
-import com.morgan.product.Vo.ResponseVo;
 import com.morgan.product.entity.Category;
 import com.morgan.product.entity.Product;
 import com.morgan.product.service.CategoryService;
 import com.morgan.product.service.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,7 +26,7 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/")
+    @GetMapping({"/",""})
     public ResponseVo<ProductVo> list(){
         List<Product> products = productService.findSaleAll();
         List<Integer> categoryType = products.stream()
@@ -54,5 +53,15 @@ public class ProductController {
         }
 
         return ResponseVo.successResponse(productVos);
+    }
+
+    @PostMapping("/decreaseStock")
+    public void  decreaseStock(@RequestBody  List<CartDTO> cartDTOS){
+        productService.decreaseStock(cartDTOS);
+    }
+
+    @PostMapping("/listForOrder")
+    public List<ProductResp> listForOrder(@RequestBody List<Integer> ids){
+        return productService.findList(ids);
     }
 }

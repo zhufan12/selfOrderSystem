@@ -1,4 +1,4 @@
-package com.morgan.product.Vo;
+package com.morgan.common;
 
 public enum ResponseCode {
 
